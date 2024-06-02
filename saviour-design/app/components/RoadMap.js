@@ -1,7 +1,15 @@
+"use client"
 import { Box, Flex, Grid, GridItem, Text } from "@chakra-ui/react";
-import Image from "next/image";
-import React from "react";
+import { useEffect } from "react";
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // Import AOS CSS
+
+
+
+
 function RoadMap() {
+ 
+  
   const data = [{
     id: 1,
     title: "Phase 1",
@@ -27,6 +35,9 @@ function RoadMap() {
   }
 
 ]
+useEffect(() => {
+  AOS.init(); // Initialize AOS with once option to trigger animations only once
+}, []);
   return (
     <>
        <Box
@@ -57,11 +68,22 @@ function RoadMap() {
 
   {data.map((item,index)=>{
     return(
-      <GridItem  display="flex"
+      <GridItem 
+      data-aos="flip-left"
+      data-aos-duration="1300"
+      display="flex"
       flexDirection="column"
       justifyContent="flex-end"
       padding="16px"
-      color="white" background={`linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.3)), url(${item.url})`} key={item.id}  w={['150.06px', '100%' ]} h={["300px","349px"]} borderRadius={"13.17px"} bgSize={"cover"} bgPos={"center"} >
+      
+              borderRadius={"13px"}
+              border={"1.5px solid rgba(237, 1, 55, 1)"}
+              position="relative"
+              overflow="hidden"
+              bgGradient={[
+                "linear(to-t, rgba(0, 0, 0, 0), rgba(10, 28, 61, 0.2), rgba(237, 1, 55, 0.09))",
+]}
+      color="white" background={`linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.3)), url(${item.url})`} key={item.id}  w={['150.06px', '237.06px' ]} h={["300px","349px"]}  bgSize={"cover"} bgPos={"center"} >
       <Text fontSize={["12.16px", "21.95px"]} fontFamily={"inter"} color="white" alignContent={"baseline"}>{item.title}</Text>
     <Text fontSize={["9.73px","17.56px"]} fontFamily={"manrope"}>{item.desc}</Text>
       </GridItem>

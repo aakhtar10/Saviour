@@ -3,6 +3,11 @@
 
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import { ZCOOL_KuaiLe, Poppins, Shojumaru ,Inter , Manrope} from 'next/font/google';
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // You can also use <link> for styles
+import { useEffect } from 'react';
+// ..
+
 
 
 const manrope = Manrope({
@@ -39,6 +44,17 @@ const theme = extendTheme({
 });
 
 export default function RootLayout({ children }) {
+  useEffect(() => {
+    AOS.init({
+      // Customize options if needed
+      duration: 1100, // Animation duration in milliseconds
+      offset: 100, // Offset from the element's position to trigger animation
+     
+      anchorPlacement: 'top-bottom',
+    });
+    // Refresh animations on new page load
+    AOS.refresh();
+  }, []);
   return (
     <html lang="en">
       <head />
